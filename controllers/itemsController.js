@@ -27,6 +27,21 @@ router.post('/', async (req, res) => {
     }
 });
 
+// Adiciona rota para buscar itens por categoria
+router.get('/category/:fk_category', async (req, res) => {
+    try {
+        const items = await Item.findAll({
+            where: { fk_category: req.params.fk_category }
+        });
+        res.status(200).json(items);
+    } catch (error) {
+        res.status(500).json({
+            error: 'Erro ao buscar itens pela categoria.',
+            details: error.message
+        });
+    }
+});
+
 router.get('/:id', async (req, res) => {
     try {
         const item = await Item.findByPk(req.params.id);
