@@ -57,7 +57,7 @@ router.get('/:id', async (req, res) => {
 router.delete('/:id', async(req, res) => {
     try {
         await Item.destroy({
-            where: { id_item: req.params.id },
+            where: { id: req.params.id },
         });
         res.status(200).json({ message: 'Excluído com sucesso' });
     } catch (error) {
@@ -74,7 +74,7 @@ router.put('/:id', async(req, res) => {
         await Item.update(
             { name, price, used, fk_category },
             {
-                where: { id_item: req.params.id },
+                where: { id: req.params.id },
             }
         );
         res.status(200).json({ message: 'Atualizado com sucesso' });
